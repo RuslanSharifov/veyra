@@ -1,0 +1,6 @@
+{
+  "name": "Home Studio 3D - Architectural CAD & 3D Floor Plan Designer",
+  "description": "Modern, professional 2D and 3D architectural home design studio with multi-floor planning, real-time 3D generation, walkthroughs, and custom object editing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
