@@ -1,0 +1,10 @@
+{
+  "identifier": "default",
+  "description": "Local Veyra main window with no privileged filesystem or network commands",
+  "windows": [
+    "main"
+  ],
+  "permissions": [
+    "core:default"
+  ]
+}
