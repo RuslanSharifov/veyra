@@ -1,0 +1,34 @@
+name: Windows desktop
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, feature/offline-desktop-foundation]
+  pull_request:
+    branches: [main]
+jobs:
+  windows:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri -> target
+      - name: Install dependencies
+        run: npm install
+      - name: Typecheck and build web assets
+        run: npm run build
+      - name: Generate Windows icons from Veyra SVG
+        run: npx tauri icon public/veyra.svg
+      - name: Bundle offline Windows installer
+        run: npm run desktop:build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Veyra-Windows-offline-installer
+          path: src-tauri/target/release/bundle/nsis/*.exe
+          if-no-files-found: error
